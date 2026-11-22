@@ -51,12 +51,13 @@ interface StoreSchema extends DBSchema {
   declarations: { key: string; value: Declaration; indexes: { 'by-point-day': string } };
   recalc: { key: string; value: RecalcCandidate; indexes: { 'by-declaration': string; 'by-point-day': string } };
   audits: { key: string; value: AuditEntry };
+  coag: { key: string; value: unknown };
 }
 
 type FileKind = IntakeFile['kind'];
 
 export const DB_NAME = 'outfall-review';
-export const DB_VERSION = 1;
+export const DB_VERSION = 2;
 export const SCHEMA_KEY = 'schemaVersion';
 export const SAMPLE_KEY = 'sampleImported';
 
@@ -67,7 +68,12 @@ let dbPromise: Promise<ReviewDB> | null = null;
 export function getDb(): Promise<ReviewDB> {
   if (!dbPromise) {
     dbPromise = openDB<StoreSchema>(DB_NAME, DB_VERSION, {
-      upgrade(db) {
+      upgrade(db, oldVersion) {
+        if (oldVersion >= 2) {
+          // v2 只新增 coag 仓库，其余按原结构复用
+          if (!db.objectStoreNames.contains('coag')) db.createObjectStore('coag');
+          return;
+        }
         db.createObjectStore('meta');
         const intake = db.createObjectStore('intake', { keyPath: 'fileId' });
         intake.createIndex('by-kind', 'kind');
@@ -92,6 +98,7 @@ export function getDb(): Promise<ReviewDB> {
         recalc.createIndex('by-declaration', 'declarationId');
         recalc.createIndex('by-point-day', 'day');
         db.createObjectStore('audits', { keyPath: 'auditId' });
+        db.createObjectStore('coag');
       },
       blocked() {
         console.warn('IndexedDB 升级被其他标签页阻塞');
@@ -136,6 +143,7 @@ export async function clearAll(): Promise<void> {
     'recalc',
     'audits',
     'meta',
+    'coag',
   ] as const;
   const tx = db.transaction(names, 'readwrite');
   await Promise.all(names.map((n) => tx.objectStore(n).clear()));
@@ -304,6 +312,17 @@ export async function intakeFiles(): Promise<IntakeFile[]> {
   const db = await getDb();
   const all = await db.getAll('intake');
   return all.sort((a, b) => b.receivedAt - a.receivedAt);
+}
+
+/** 混凝模块的本地存储：整包写入（样例 5 MB 级，单事务即可） */
+export async function putCoagBundle(key: string, value: unknown): Promise<void> {
+  const db = await getDb();
+  await db.put('coag', value, key);
+}
+
+export async function getCoagBundle<T>(key: string): Promise<T | undefined> {
+  const db = await getDb();
+  return (await db.get('coag', key)) as T | undefined;
 }
 
 export async function currentSchema(): Promise<number> {

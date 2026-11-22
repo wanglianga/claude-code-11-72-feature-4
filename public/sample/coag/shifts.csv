@@ -1,0 +1,4 @@
+shift_id,plant_id,code,name,start_minute,end_minute
+S-NIGHT,P1,夜班,00:00–08:00,0,480
+S-DAY,P1,白班,08:00–16:00,480,960
+S-EVENING,P1,晚班,16:00–24:00,960,1440

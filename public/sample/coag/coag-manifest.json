@@ -1,0 +1,168 @@
+{
+  "name": "混凝剂投加效率复核样例（虚构）",
+  "description": "2026-11-18 一厂两个混凝池的进出口在线读数、旁路/搅拌/工况事件、药剂批次与库存转移、泵脉冲与校准、化验与班次处置。",
+  "generatedAt": "2026-11-20T02:00:00.000Z",
+  "timezone": "Asia/Shanghai",
+  "day": "2026-11-18",
+  "baseFiles": [
+    {
+      "fileName": "plants.csv",
+      "kind": "PLANTS",
+      "rowCount": 1,
+      "sha256": "1e7caba6a92478278da3f518958f552fa2b7b5d99848a6013fd68b57d61bb519",
+      "receivedAt": 1795042800000,
+      "note": "厂站台账"
+    },
+    {
+      "fileName": "tanks.csv",
+      "kind": "TANKS",
+      "rowCount": 2,
+      "sha256": "e34c28dc09f89957ec47064613a398125f0b9275287a8ee457f756bfedd917a7",
+      "receivedAt": 1795042800000,
+      "note": "混凝池有效池容、允许停留时间范围、回流比例与进出水点位映射"
+    },
+    {
+      "fileName": "points.csv",
+      "kind": "POINTS",
+      "rowCount": 4,
+      "sha256": "e4d1fff1001df3220f609ec5c5b6f759750bd927f840b328a46e19d091da38fe",
+      "receivedAt": 1795042800000,
+      "note": "进出口点位与传感器时间偏移"
+    },
+    {
+      "fileName": "storage_tanks.csv",
+      "kind": "STORAGE",
+      "rowCount": 3,
+      "sha256": "e31f4f83ff70fdbe2ed4a25d98235657c53d3696b4b4680162139bb990cc5d4f",
+      "receivedAt": 1795042800000,
+      "note": "储罐台账"
+    },
+    {
+      "fileName": "batches.csv",
+      "kind": "BATCHES",
+      "rowCount": 4,
+      "sha256": "7983dcd0eb17f30c9ac6c9e505e9cbdafc495fd1facd633b8fe3a9a12983e277",
+      "receivedAt": 1795042800000,
+      "note": "药剂批次账（浓度、入库时刻与入库量）"
+    },
+    {
+      "fileName": "transfers.csv",
+      "kind": "TRANSFERS",
+      "rowCount": 7,
+      "sha256": "8206d1206c63b0172b27db892e43c8a9f21eff6ce960ec2dd3138bee99e8d5df",
+      "receivedAt": 1795042800000,
+      "note": "转罐/稀释记录（resulting_concentration 为动作后按混合比例算出的浓度）"
+    },
+    {
+      "fileName": "stocktakes.csv",
+      "kind": "STOCKTAKES",
+      "rowCount": 7,
+      "sha256": "298389f73769baba400dbc6f576c1aa21d3c9df8023f15f04ee40e62486e28d8",
+      "receivedAt": 1795042800000,
+      "note": "储罐盘点"
+    },
+    {
+      "fileName": "pulses.csv",
+      "kind": "PULSES",
+      "rowCount": 84,
+      "sha256": "7ae85b1b0878018cb4b9531a0fd6f95f955cc465e83f0271ccbd4ba32f884fbb",
+      "receivedAt": 1795042800000,
+      "note": "泵脉冲/设定值履历（实际投加证据）"
+    },
+    {
+      "fileName": "pump_calibrations.csv",
+      "kind": "PUMP_CALIBRATIONS",
+      "rowCount": 3,
+      "sha256": "7ee52a1018c95ea34a185d8325d3829c0df6a88f55992607b7d4a14399c413fe",
+      "receivedAt": 1795042800000,
+      "note": "泵校准（可在班中生效/失效）"
+    },
+    {
+      "fileName": "bypass.csv",
+      "kind": "BYPASS",
+      "rowCount": 1,
+      "sha256": "3652b15dce1df6ebd75bb7e27b61586ad7d98141eeb6bd1fd816d0bf4ec06039",
+      "receivedAt": 1795042800000,
+      "note": "旁路状态"
+    },
+    {
+      "fileName": "mixing.csv",
+      "kind": "MIXING",
+      "rowCount": 2,
+      "sha256": "cdc8c9a746a970a4bdd25ace3f3c89cf28c14009b81854ed5bbb63032c16add4",
+      "receivedAt": 1795042800000,
+      "note": "搅拌状态"
+    },
+    {
+      "fileName": "upsets.csv",
+      "kind": "UPSETS",
+      "rowCount": 5,
+      "sha256": "5841f9ab2b0baf9f31aacb8e3bc84ec97a78c16c673cf57a6b5c37f156b1d000",
+      "receivedAt": 1795042800000,
+      "note": "工况突变事件（暴雨/低温/浊度突升等）"
+    },
+    {
+      "fileName": "labs.csv",
+      "kind": "LABS",
+      "rowCount": 7,
+      "sha256": "67d69e3120f0de9bb4796bb1dc5b4887301fd5a19dd6c99eb872962b59eb3bfc",
+      "receivedAt": 1795042800000,
+      "note": "化验结果（基础批次）"
+    },
+    {
+      "fileName": "shifts.csv",
+      "kind": "SHIFTS",
+      "rowCount": 3,
+      "sha256": "f6f469c92e6aafacb53f4188733ee6de82eb688989b4714db5399270ef19c7e3",
+      "receivedAt": 1795042800000,
+      "note": "班次定义（本地时刻，分钟）"
+    },
+    {
+      "fileName": "shift_actions.csv",
+      "kind": "SHIFT_ACTIONS",
+      "rowCount": 7,
+      "sha256": "efeaba48a5fe56a5227a031ec867399f012bc4dc2e394e888398cb52d916bff6",
+      "receivedAt": 1795042800000,
+      "note": "当班处置记录（不可改写）"
+    },
+    {
+      "fileName": "readings_CT-01.csv",
+      "kind": "READINGS",
+      "rowCount": 7472,
+      "sha256": "00265db4607c2603de4f9ebd979caa7c07c90805b4c07c38b823049de5017ace",
+      "receivedAt": 1795042800000,
+      "note": "CT-01 进出口在线读数"
+    },
+    {
+      "fileName": "readings_CT-02.csv",
+      "kind": "READINGS",
+      "rowCount": 7488,
+      "sha256": "ec9d3b5ddc04a6972dc369cc8ff45e203750689e17821c7d2a405b395e1e3807",
+      "receivedAt": 1795042800000,
+      "note": "CT-02 进出口在线读数"
+    }
+  ],
+  "lateFile": {
+    "fileName": "late_labs_2026-11-19.csv",
+    "kind": "LATE_BATCH",
+    "rowCount": 3,
+    "sha256": "4a24c05070264634014554af2763d4edddd900039f563df7cd336a977fd0448e",
+    "receivedAt": 1795044600000,
+    "note": "迟到化验：11-19 15:20/15:30 到达，晚于复盘截止（11-19 08:00）。"
+  },
+  "focus": {
+    "plantId": "P1",
+    "tankId": "CT-01",
+    "day": "2026-11-18",
+    "reviewCutoffReceivedAt": 1795035600000,
+    "scenario": [
+      "暴雨：05:50–08:30 进水浊度与流量抬升，同投加量下去除率下降",
+      "搅拌停止 03:30–05:00；浊度突升 13:30–14:30",
+      "出水旁路 16:30–17:10：配对只给范围，停止与正常段排名",
+      "储罐 06:40 稀释、07:10 转罐混配：浓度按混合比例追踪",
+      "CT-02 泵校准 09:40 失效、10:20 重新校准：期间投加量只有范围",
+      "CT-02 投加罐 11:03 抽空、12:10 转罐补料：缺料异常",
+      "迟到化验（11-19 15:20 到达）只形成新的复盘候选，不改写当班处置"
+    ]
+  }
+}

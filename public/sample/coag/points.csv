@@ -1,0 +1,5 @@
+point_code,tank_id,plant_id,role,name,metrics,clock_offset_ms,clock_offset_uncertainty_ms,nominal_interval_seconds,value_uncertainty,note
+IN-01,CT-01,P1,INLET,一期混凝池 A 进口,FLOW;TURBIDITY;PH;TEMP;COD;NH3N,1200,200,60,0.02,一期混凝池 A 进口；传感器时间偏移 +1.2 s。
+OUT-01,CT-01,P1,OUTLET,一期混凝池 A 出水,COD;NH3N;TURBIDITY;PH,-900,250,300,0.03,一期混凝池 A 出水；传感器时间偏移 -0.9 s。
+IN-02,CT-02,P1,INLET,二期混凝池 B 进口,FLOW;TURBIDITY;PH;TEMP;COD;NH3N,-1500,300,60,0.02,二期混凝池 B 进口；传感器时间偏移 -1.5 s。
+OUT-02,CT-02,P1,OUTLET,二期混凝池 B 出水,COD;NH3N;TURBIDITY;PH,2400,300,300,0.03,二期混凝池 B 出水；传感器时间偏移 +2.4 s。

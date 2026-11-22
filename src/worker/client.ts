@@ -2,6 +2,8 @@
 
 import type { WorkerRequest, WorkerResponse, WorkerResponseOk } from './compute.worker';
 
+type WorkerScope = typeof globalThis & { Worker?: typeof Worker };
+
 type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
 export type WorkerRequestInput = DistributiveOmit<WorkerRequest, 'id'>;
 
@@ -17,7 +19,9 @@ type Pending = {
 };
 
 export function createWorkerClient(): WorkerClient {
-  const worker = new Worker(new URL('./compute.worker.ts', import.meta.url), { type: 'module' });
+  const WorkerCtor = (globalThis as WorkerScope).Worker;
+  if (!WorkerCtor) throw new Error('当前环境不支持 Web Worker，无法执行重计算');
+  const worker = new WorkerCtor(new URL('./compute.worker.ts', import.meta.url), { type: 'module' });
   const pending = new Map<string, Pending>();
   let counter = 0;
 

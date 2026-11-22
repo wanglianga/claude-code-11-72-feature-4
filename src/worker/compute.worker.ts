@@ -16,13 +16,16 @@ import {
 } from '../domain/types';
 import { compareRoutes, computeDayLoad, computeMonthLoad } from '../domain/engine';
 import { buildDeclaration, buildRecalcCandidate, detectLateReadings } from '../domain/service';
+import { computeTankEfficiency } from '../coag/engine';
+import type { CoagDataset, TankEfficiency } from '../coag/types';
 
 export type WorkerRequest =
   | { id: string; type: 'computeDay'; dataset: Dataset; pointCode: string; day: string; method: IntegrationMethod; scope?: Partial<ScopeOptions>; withChart?: boolean }
   | { id: string; type: 'compareRoutes'; dataset: Dataset; pointCode: string; day: string; scope?: Partial<ScopeOptions> }
   | { id: string; type: 'computeMonth'; dataset: Dataset; pointCode: string; month: string; method: IntegrationMethod; scope?: Partial<ScopeOptions> }
   | { id: string; type: 'buildDeclaration'; dataset: Dataset; pointCode: string; day: string; method: IntegrationMethod; createdBy: string; scope?: Partial<ScopeOptions>; cutoffReceivedAt?: number }
-  | { id: string; type: 'buildRecalc'; dataset: Dataset; declaration: Declaration; createdBy: string; scope?: Partial<ScopeOptions>; autoDetected?: boolean };
+  | { id: string; type: 'buildRecalc'; dataset: Dataset; declaration: Declaration; createdBy: string; scope?: Partial<ScopeOptions>; autoDetected?: boolean }
+  | { id: string; type: 'computeCoag'; dataset: CoagDataset; tankId: string; day: string; reviewCutoffReceivedAt?: number };
 
 export interface WorkerResponseOk {
   id: string;
@@ -33,7 +36,8 @@ export interface WorkerResponseOk {
     | ReturnType<typeof compareRoutes>
     | MonthLoad
     | Declaration
-    | RecalcCandidate;
+    | RecalcCandidate
+    | TankEfficiency;
   tookMs: number;
 }
 
@@ -90,6 +94,14 @@ self.onmessage = (event: MessageEvent<WorkerRequest>) => {
           },
           nowMs(),
         );
+        post({ id: req.id, ok: true, type: req.type, payload, tookMs: nowMs() - started });
+        break;
+      }
+      case 'computeCoag': {
+        const payload = computeTankEfficiency(req.dataset, req.tankId, req.day, {
+          reviewCutoffReceivedAt: req.reviewCutoffReceivedAt,
+          now: nowMs(),
+        });
         post({ id: req.id, ok: true, type: req.type, payload, tookMs: nowMs() - started });
         break;
       }

@@ -1,0 +1,3 @@
+tank_id,plant_id,name,effective_volume_m3,min_residence_s,max_residence_s,recycle_ratio,inlet_point_code,outlet_point_code,volume_uncertainty,storage_id,note
+CT-01,P1,一期混凝池 A,200,600,1800,0.12,IN-01,OUT-01,0.04,SS-01,有效池容 200 m³；回流比 12%；设计停留 10–30 分钟。暴雨期流量抬升会压缩停留时间。
+CT-02,P1,二期混凝池 B,180,720,2400,0.1,IN-02,OUT-02,0.05,SS-02,有效池容 180 m³；回流比 10%；设计停留 12–40 分钟。储罐容量小，需要白班转罐补料。

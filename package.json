@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "污水处理厂排口污染负荷离线复核分析台（React + TypeScript + IndexedDB + WebWorker）",
+  "description": "污水处理厂排口污染负荷离线复核台 + 混凝剂投加效率复核（React + TypeScript + IndexedDB + WebWorker）",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "tsc --noEmit && vite build",
@@ -15,7 +15,9 @@
     "verify:sample": "tsx scripts/verify-sample.ts",
     "start": "npm run build && vite preview --host 0.0.0.0 --port 4173",
     "serve": "vite preview --host 0.0.0.0 --port 4173",
-    "verify": "tsc --noEmit && vitest run && tsx scripts/verify-sample.ts"
+    "verify": "tsc --noEmit && vitest run && tsx scripts/verify-sample.ts && tsx scripts/verify-coag.ts",
+    "generate:coag": "tsx scripts/generate-coag-sample.ts",
+    "verify:coag": "tsx scripts/verify-coag.ts"
   },
   "dependencies": {
     "idb": "^8.0.4",

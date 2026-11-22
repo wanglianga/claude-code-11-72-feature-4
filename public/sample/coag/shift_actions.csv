@@ -1,0 +1,8 @@
+action_id,shift_id,plant_id,at,recorded_by,category,text,ref_ids
+SA-01,S-NIGHT,P1,2026-11-18T03:45:00+08:00,夜班值班长,CONDITION_SHIFT,搅拌器停机，已切换备用搅拌并通知检修；本班出水只作参考，不参与效率排名。,MX-01
+SA-02,S-NIGHT,P1,2026-11-18T06:10:00+08:00,夜班值班长,CONDITION_SHIFT,暴雨来袭，提高投加设定至 26 L/h，加密取样；记录进水浊度与流量。,UP-01
+SA-03,S-NIGHT,P1,2026-11-18T06:55:00+08:00,夜班值班长,METERING_UNCERTAIN,储罐稀释后浓度按混合比例折算，已留药剂样送检。,TR-01
+SA-04,S-DAY,P1,2026-11-18T09:45:00+08:00,白班值班长,METERING_UNCERTAIN,CT-02 脉冲计数器故障，暂停按单位药耗排名，等待重新校准。,PC-02
+SA-05,S-DAY,P1,2026-11-18T11:10:00+08:00,白班值班长,FEED_SHORTAGE,CT-02 投加罐抽空，已降负荷并安排转罐补料。,ST-02-DRY
+SA-06,S-DAY,P1,2026-11-18T12:20:00+08:00,白班值班长,SAMPLING_PENDING,10:15 出水样已送第三方，结果未回；本段效率结论待结果。,L-1201
+SA-07,S-EVENING,P1,2026-11-18T16:35:00+08:00,晚班值班长,CONDITION_SHIFT,出水旁路开启，混凝段退出运行，配对只给范围并停止排名。,BP-01
